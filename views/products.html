@@ -1,0 +1,211 @@
+<!--
+* Aqui são selecionados, criados e editados os produtos  que pretende usar no site
+*
+-->
+<div class="container">
+    <h1 class="text-center">Produtos</h1>
+    <div class="row">
+        <!-- list of products on menu  -->
+        <div class="col-md-7">
+            <h2>Adicionar produtos</h2>
+            <p>Crie, altere ou remova produtos das respectivas categorias</p>
+             <!-- lista os botões com as categorias. quando clica numa delas mostra os produtos embaixo e os produtos comuns na lateral direita-->
+            <div ng-repeat="prd in cats">
+                <button ng-click="openCategory(prd.catj.PT,prd.catid)" class="btn btn-info btn-block">{{prd.catj.PT}}</button>
+                
+                <div id="{{prd.catj.PT}}" class="pn container hide" style="width:100%;">
+                    <button class="btn btn-warning text-left" ng-click="addNewProduct()"><span class="fa fa-plus"></span> Adicionar</button>
+                    <table class="table-condensed table-bordered">
+                        <tbody>
+                            <tr ng-repeat="p in produtos">
+                                <td><img ng-src="img/{{p.folder}}/{{p.photo}}" alt="" style="max-height: 40px;"></td>
+                                <td>{{p.nj.PT}}</td>
+                                <td>{{p.dj.PT}}</td>
+                                <td>{{p.price}}</td>
+                                <td><button class="btn btn-small btn-danger">Desativar</button></td>
+                                <td><button class="btn btn-small btn-info" ng-click="editProduct(p)"><span class="fa fa-pencil"></span>Editar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>            
+        </div>
+        <!-- List of products ready to use -->
+        <div class="col-md-5">
+            <div style="height: 80%; overflow-y: scroll">
+                <h4>Produtos comuns</h4>
+                <div class="container-fluid">
+                    <div class="col-sm-6" ng-repeat="pc in produtosComuns">
+                        <div class="thumbnail"  ng-click="addCommunProd(pc)">
+                            <div class="caption text-center"><span class=" text-uppercase text-info">{{pc.nj.PT}}</span></div>
+                            <img ng-src="img/{{pc.folder}}/{{pc.photo}}" style="max-width:100%;max-height: 80px;"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    <!-- Navigation Button -->
+    <div class="row" style="margin-top: 70px;">
+        <div class="col-xs-12 text-center">
+            <a href="#/cats" class="btn btn-success"><i class="fa fa-arrow-left"></i> Anterior</a>
+            <a href="#/fim" class="btn btn-success"> Fim <i class="fa fa-arrow-right"></i></a>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal for adding a comun product to selected category  -->
+    <script type="text/ng-template" id="modalAddComunProduct.html" ng-controller="modalInstanceAddComunProd">
+    <div class="modal-header">
+        <h3 class="modal-title">Adicionar Produto
+        <span class="closeModal" ng-click="closeModal()">X</span>
+        </h3>
+    </div>
+    <div class="modal-body text-center">
+        <form  ng-submit="saveCommunProd(pr)" class="form-inline">
+            <div class="form-group">
+                <label for="name">Nome PT 
+                    <input class="form-control" style="width:260px;" id="name" type="text" ng-model="pr.pn['PT']" value="pr.pn[{{pr.pn['PT']}}]" readonly=""/>
+                </label>
+            </div>
+            <br/>
+            <!-- Preço e outras informações -->
+            <div class="form-group">
+                <label for="price">Preço 
+                    <input id="price" class="form-control" style="width:60px;" type="text" ng-model="pr.price" ng-change="testPreco(pr.price)" required/>
+                </label>
+            </div>
+            <div class="form-inline">
+                <label for="ativo">Ativo: 
+                    <input class="form-control" id="ativo" type="checkbox" ng-model="pr.inmenu" name="inmenu"/>
+                </label>
+                <label for="destacar">Destacar 
+                    <input id="destacar" class="form-control" type="checkbox" ng-model="pr.highlight" name="highlight"/>
+                </label>                
+                <label for="promocao">Promoção 
+                    <input id="promocao" class="form-control" type="checkbox" ng-model="pr.promotion" name="promotion"/>
+                </label>
+                <br/>
+                <label ng-if="pr.promotion" for="prpromo">Preço Promoção: 
+                    <input id="prpromo" class="form-control xs-col-1" type="text" ng-model="pr.promoprice" ng-change="testPromo(pr.promoprice)" required=""/>
+                </label>
+            </div>
+            <div class="thumbnail">
+            <br/>
+                   <img ng-src="img/{{imgFolder}}/{{imgModal}}" alt="" style="max-width: 70%;max-height: 100px; margin: auto" id="catImg"/>
+            </div>
+
+            <div class="modal-footer">
+               <button class="btn btn-sm btn-warning" ng-click="closeModal()">Cancelar</button>
+               <button type="submit" class="btn btn-sm btn-success">Guardar</button>        
+            </div>
+        </form>
+    </div>
+    </script> 
+    
+    <!--  Modal for editing and new Products- ----                                           -----    ---->    
+    <script type="text/ng-template" id="modalEditProduct.html" ng-controller="modalInstanceEditProd">  
+        <div class="modal-header">
+            <h3 class="modal-title">
+                Editar Produto
+                <span class="closeModal" ng-click="closeModal()">X</span>
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="container-fluid">
+            <form>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Nome:</label>
+                            <div ng-repeat="lg in langs" class="form-inline">
+                                <label>{{k=lg.sgl}}
+                                    <input class="form-control" type="text" ng-model="pr.pn[k]" value="{{pr.pn[k]}}"/>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="thumbnail">
+                            <img ng-src="img/{{pr.folder}}/{{pr.photo}}" alt="" style="max-height: 160px;">
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary" ng-click="changeImg()">Trocar Imagem</button>
+                        </div>
+                    </div>
+                </div>
+            <!-- Second line -->
+            <div class="row">
+            <!-- Descriptions -->
+                <div class="col-md-8 form-group">
+                    <label>Descrição:</label>
+                    <div ng-repeat="lg in langs" class="form-inline">
+                        <label>{{k=lg.sgl}}
+                            <textarea class="form-control" ng-model="pr.description[k]" cols="40" rows="2" >{{pr.description[k]}}</textarea>
+                        </label>
+                    </div>
+                </div>
+            <!-- price and other informations -->
+                <div class="col-md-4 form-inline">
+                    <br/>    
+                    <div class="form-group">
+                        <label>Preço: 
+                            <input type="number" ng-model="pr.price" min="0" ng-change="testPrice(pr.price)" class="form-control" style="width:80px"/>
+                        </label>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label>Ativo
+                            <input type="checkbox"  ng-checked="{{chk}}"  ng-model="pr.inmenu" name="inmenu" class="form-control">
+                        </label>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label>Destacar 
+                            <input type="checkbox" ng-model="pr.highlight" name="highlight" class="form-control"/>
+                        </label>
+                    </div>
+                    <br/>
+                    <div class="form-group">
+                        <label>Promoção 
+                            <input type="checkbox" ng-model="pr.promotion" name="promotion" class="form-control"/>
+                        </label>
+                    
+                        <label ng-if="pr.promotion">Preço Promoção 
+                            <input type="number" ng-model="pr.promoprice" min="0" ng-change="testPromo(pr.promoprice)" class="form-control" style="width: 80px;"/>
+                        </label>
+                    </div>
+                    
+
+
+                </div>
+            </form>
+        </div>
+        </div>
+        <div class="modal-footer">
+           <button class="btn btn-success btn-sm" ng-click="saveProduct(pr)">Guardar</button>        
+        </div>
+   
+    </script>
+           
+         <!--  Show pictures Modal - select from communs or add new -->
+    <script type="text/ng-template" id="modalShowImg.html" ng-controller="modalInstanceShowImgs">
+        <div class="modal-header">
+            <h3 class="modal-title">
+                Selecione uma destas imagens
+                <span class="closeModal" ng-click="closeModal()">X</span>
+            </h3>
+        </div>
+        <div class="modal-body">
+           <img  ng-repeat="pic in pics" ng-src="img/communs/{{pic}}" ng-click="selectPic(pic)" alt="" style="max-width: 120px; max-height: 90px" class="w3-padding"/>
+        </div>
+        <div class="modal-footer">
+            <div>
+                 <input type="file" files-input ng-model="fileList" ng-change="loadPreview()" multiple />
+            </div>
+            <button class="btn btn-primary" ng-click="upload()">Gravar</button>
+            <button class="btn btn-success" ng-click="saveNewPic()">Guardar</button>        
+        </div>
+    </script>

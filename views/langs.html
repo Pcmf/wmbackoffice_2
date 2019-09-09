@@ -1,0 +1,44 @@
+<!--
+* Aqui são definidos os idiomas que pretende usar no site
+*
+-->
+<div class="container">
+    <h1 class="text-center">Selecionar Idiomas</h1>
+    <div class="panel panel-info">
+        <p>Aqui deve selecionar os idiomas que pretenda usar no menu de forma que o cliente possa
+         escolher o seu idioma. O sistema já tem alguns produtos base com tradução em quatro idiomas:<p/>
+        <ul class="list-inline text-primary text-center">
+            <li>Português</li>
+            <li>Inglês</li>
+            <li>Francês</li>
+            <li>Espanhol</li>
+        </ul>
+        <p>No entanto sempre que adicionar um novo produto terá de usar todos os idiomas que selecionar.</p>
+        <p>Pode adicionar outros idiomas, no entanto como estes ainda não estão em sistema,
+            terá de adicionar todas as traduções. </p>
+    </div>
+    <form class="form-group" ng-submit="saveLangs(l)">
+    <div class="jumbotron">
+        <div class="row">
+            <!-- 4 Idiomas por defeito  -->
+            <div class="">
+                <ul class="list-unstyled col-md-3" ng-repeat="lang in langs">
+                    <li>
+                        <label>
+                             <input class="checkbox-inline" type="checkbox" checklist-model="l.langs" checklist-value="lang"> 
+            <!--               <input class="checkbox-inline" type="checkbox" checklist-model="l.lang" checklist-value="lang"> -->
+                            <img src="img/site/flags/{{lang.flag}}" class="smallFlags" alt=""> - {{lang.country}}
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <button class="btn btn-lg btn-success" type="submit"><i class="fa fa-save fa-2x"></i> Guardar</button>
+        </div>
+    </div>
+    </form>
+</div>

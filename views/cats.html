@@ -1,0 +1,146 @@
+<!--
+* Aqui são selecionadas e configuradas as Categorias que pretende usar no site
+*
+-->
+<div class="container">
+    
+    <div class="row" style="margin-top: 20px;">
+        <!-- Pre visualização do menu -->
+        <div class="col-md-5">
+            <div id="mokupPhone">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <img src="img/site/adr_tope.png" style="width:348px;">
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <img src="img/site/adr_left.png" style="float: left;height: 450px;margin-left: 1px">
+                        <img src="img/site/adr_right.png" style="float: right;height: 450px">
+        <!-- Conteudo do modelo - o que irá aparecer no tlm-->
+                        <div ng-if="type != 4" id="ipMainContent">
+                            <div class="topHead">
+                                <div class="topHeadName">{{company.name}}</div>
+                                <ul class="list-inline topHeadFlags" ng-repeat="lg in langs">
+                                    <li><img src="img/site/flags/{{lg.flag}}" class="flags" alt="" ng-click="changeLang(lg.sgl)"/></li>
+                                </ul>
+                            </div>
+                <!-- Type1, Type2, Type3  -->
+                            <div class="row" id="ipContent">
+                                    <div ng-if="type == 1" class="col-xs-6 text-center" ng-repeat="cat in cats">
+                                        <div class="thumbnail" ng-click="editCat(cat)">
+                                            {{cat.catj[LG]}}
+                                            <img ng-src="img/communs/{{cat.img}}"/>
+                                        </div>
+                                    </div>
+                                    <div ng-if="type == 2" class="col-xs-12 text-center" ng-repeat="cat in cats">
+                                        <div class="thumbnail" ng-click="editCat(cat)">
+                                            {{cat.catj[LG]}}
+                                            <img ng-src="img/communs/{{cat.img}}"/>
+                                        </div>
+                                    </div>
+                                    <div ng-if="type == 3" class="col-xs-12 text-center" ng-repeat="cat in cats">
+                                        <div class="text-capitalize">
+                                            <h3><a ng-click="editCat(cat)">{{cat.catj[LG]}}</a></h3>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+        <!-- TYPE4 - -->
+                        <div ng-if="type == 4" id="ipMainContent">
+                            <div class="topHead">
+                                <div class="topHeadName">{{company.name}}</div>
+                                <ul class="list-inline topHeadFlags" ng-repeat="lg in langs">
+                                    <li><img src="img/site/flags/{{lg.flag}}" class="flags" alt="" ng-click="changeLang(lg.sgl)"/></li>
+                                </ul>
+                                <select name="selectCat"ng-selected="editCat(cat)" class="text-primary">
+                                    <option value="" disabled="" selected>Escolha...</option>
+                                    <option value="cat" ng-repeat="cat in cats" class="text-primary">{{cat.catj[LG]}}</option>
+                                </select>
+                            </div>
+                            <div class="row" id="ipContent4">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <img src="img/site/adr_bott.png" style="width:348px;">
+                    </div>
+
+                </div>  
+            </div>
+            <p class="text-info">Nota: a vista acima pode depender do smartphone usado</p>
+        </div>
+        
+        <!-- Categorias Comuns -->
+        <div class="col-md-7">
+            <h3 class="text-left">Configurar Categorias</h3>
+            <button class="btn btn-info" ng-click="newCat()"><span class="fa fa-plus-circle fa-2x"></span> Criar Nova Categoria</button>
+            <div class="container-fluid" id="catCommuns">
+                <div class="row">
+                    <div class="col-md-4 col-lg-3" ng-repeat="ct in catgs">
+                        <div class="thumbnail text-center" ng-click="editCat(ct)">
+                            <span class="text-primary">{{ct.catj[LG]}}</span>
+                            <img ng-src="img/communs/{{ct.img}}" alt="Imagem">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- line with button to go to menu types or to products -->
+    <div class="row">
+        <div class="col-lg-12 text-center" style="margin-top: 50px;">
+            <a href="#/types" class="btn btn-success"><i class="fa fa-arrow-left"> Anterior</i></a>
+            <a href="#/products" class="btn btn-success">Seguinte <i class="fa fa-arrow-right"></i></a>
+        </div>
+    </div>
+</div>
+
+
+    <!--  Edit Cat Modal  -->
+    <script type="text/ng-template" id="modalEditCat.html" ng-controller="modalInstanceEditCat">
+        <div class="modal-header">
+            <h3 class="modal-title">
+                Editar Categoria
+                <span class="closeModal" ng-click="closeModal()">X</span>
+            </h3>
+        </div>
+        <div class="modal-body text-center">
+                    <div ng-repeat="lg in langs">
+                    <label>{{k=lg.sgl}}
+                        <input type="text" ng-model="cts.catj[k]" value="cts.catj[k]"/>
+                    </label>
+                    </div>
+                <img ng-src="img/{{cts.folder}}/{{imgModal}}" alt="" style="max-width: 80%; margin: auto" id="catImg"/>
+        </div>
+        <div class="modal-footer text-center">
+            <button class="btn btn-danger" ng-click="removeCat(cts)"><span class="fa fa-trash"> Remover</span></button>
+            <button class="btn btn-info" ng-click="changeImg()"><span class="fa fa-retweet"></span> Trocar Imagem</button>
+           <button class="btn btn-success" ng-click="saveChanges(imgModal,cats)"><span class="fa fa-save"></span> Guardar</button> 
+           <button class="btn btn-warning" ng-click="closeModal()">Cancelar</button>
+        </div>
+    </script>
+
+        <!--  Show pictures Modal-->
+    <script type="text/ng-template" id="modalShowImg.html">
+        <div class="modal-header">
+            <h3 class="modal-title">
+                Selecione uma destas imagens
+                <span class="closeModal" ng-click="closeModal()">X</span>
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div id="modalPics">
+                <img  ng-repeat="pic in pics" ng-src="img/communs/{{pic}}" ng-click="selectPic(pic)" alt="" style="width: 150px; max-height: 90px" class="w3-padding"/>
+            </div>
+        </div>
+        <div class="modal-footer">
+    <!--        <button class="btn btn-info" ng-click="getNewImg()">Escolher outra</button> -->
+            <input type="file" ng-file-select="Img($files)" multiple='false' id="fileSelect" required="required"/> 
+
+            <button class="btn btn-success">Guardar</button>        
+        </div>
+    </script>

@@ -1,0 +1,54 @@
+<!--
+* Aqui são apresntados os modelos de menu que pode usar no site
+*
+-->
+<div class="container">
+    <h1 class="text-center">Selecionar O Tipo de Menu</h1>
+    
+    <div class="row">
+        <div class="col-md-3" id="type1" ng-click="selectType(1)">
+            <div class="text-center">
+                <span ng-show="selectedType == 1" class="fa fa-check fa-3x text-success"></span>
+            </div>
+            <img class="handPhone" src="img/site/iphone_hand3.png" alt=""/>
+            <p class="">Esta ementa é adequada para Restaurantes ou Bares onde haja muitas 
+                    categorias diferentes, pois permite apresentar muitas na mesma vista. É simples, tem 
+                uma boa apresentação para todo o tipo de smartphones. Bastante intuitiva e 
+                com rápido acesso  ás diferentes categorias. 
+            </p>
+        </div>
+        <div class="col-md-3 " id="type2" ng-click="selectType(2)">
+            <div class="text-center">
+            <span ng-show="selectedType == 2" class="fa fa-check fa-3x text-success"></span>
+            </div>
+            <img class="handPhone" src="img/site/iphone_hand7.png" alt=""/>
+            <p class="">Com esta visualização pode-se usar imagens mais apelativas 
+                para cada categoria. A ordem das categorias pode ser definida conforme o interesse 
+                em a promover algumas. 
+            </p>
+        </div>
+        <div class="col-md-3" id="type3" ng-click="selectType(3)">
+            <div class="text-center">
+            <span ng-show="selectedType == 3" class="fa fa-check fa-3x text-success"></span>
+            </div>
+            <img class="handPhone"  src="img/site/ip6white3.png" alt=""/>
+                    <p class="">Esta é a ementa mais simples de usar e de configurar.
+                    Alem disso, este formato permite destacar e promover produtos de uma forma 
+                superior aos outros. Ideal para esplanadas e bares. </p>            
+        </div>
+        <div class="col-md-3" id="type4" ng-click="selectType(4)">
+            <div class="text-center">
+            <span ng-show="selectedType == 4" class="fa fa-check fa-3x text-success"></span>
+            </div>
+            <img class="handPhone" src="img/site/ip6white4.png" alt=""/>
+                    <p class="">Esta é a ementa mais simples de usar e de configurar.
+                    Alem disso, este formato permite destacar e promover produtos de uma forma 
+                superior aos outros. Ideal para esplanadas e bares.</p>            
+        </div>
+    </div>
+    <div class="row">
+        <div class="text-center" ng-show="selectedType > 0">
+            <a href="#/cats" class="btn btn-lg btn-success" >Seguinte <span class="fa fa-arrow-right"></span></a>
+        </div>
+    </div>
+</div>

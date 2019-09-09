@@ -1,0 +1,136 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 28/out/2017, 23:22:59
+    Author     : AsusE2
+*/
+
+body{
+    /* Ensure the html element always takes up the full height of the browser window */
+    min-height:100%;
+    
+    font-family: Lato; 
+}
+
+html{
+    /* Workaround for some mobile browsers */
+    min-height:100%;
+}
+#mainDiv{
+    margin-top: 50px;
+}
+#logo{
+    height: 35px;
+    margin-bottom: 5px;
+}
+.smallFlags{
+    width: 30px;
+    height: 20px;
+    margin: 5px;
+}
+.handPhone{
+    height: 200px;
+    margin: 5px;
+}
+
+/* Modelo de previsualização com moldura de iphone */
+#mokupPhone{
+    width: 347px;
+/*    background-color: #245580;*/
+    
+}
+#ipMainContent{
+    position: relative;
+    top:0px;
+    left: 22px;
+    width: 302px;
+    height: 450px;
+    background-color: white;
+}
+
+/* Header on mokup phone */
+.topHead{
+    position: relative;
+    top: 0px;
+    left: -2px;
+    z-index: 1000;
+    width: 307px;
+    height: 50px;
+    /*margin-left: 28px;*/
+    background-color: #666;
+    color: white;
+}
+.topHeadName{
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    word-spacing: 1%;
+    z-index: 1001;
+}
+.topHeadFlags{
+    max-height: 35px;
+    z-index: 1001;
+    display: inline;
+}
+
+#ipContent{
+    position: relative;
+    top: -400px;
+    left: 16px;
+   z-index: 1000;
+   width: 300px;
+   height: 400px;
+   overflow-y: scroll;
+ /*  background-color: white;*/
+   background-image: url("../img/site/backTable.jpg");
+}
+#ipContent h3{
+    font-family: cursive;
+    font-weight: 500;
+    font-size: 2em;
+    color: #265a88; 
+}
+#ipContent4{
+    position: relative;
+    top: -400px;
+    left: 16px;
+    z-index: 1000;
+    width: 300px;
+    height: 400px;
+    overflow-y: scroll;
+    background-image: url("../img/site/logo.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: lightgrey; 
+}
+
+/*Painel for commun categories*/
+.closeModal{
+    width: 15px;
+    float: right;
+}
+
+.closeModal:hover{
+    cursor: pointer;
+    background-color: lightgray; 
+}
+
+
+#catCommuns,#modalPics{
+    height: 550px;
+    border: 1px lightslategray outset;
+    overflow-y: scroll;
+    margin-top: 40px;
+    
+}
+select:invalid { color: gray; }
+
+.form-inline label{
+    margin-right: 15px;
+}
+.form-inline label input{
+    margin-left: 5px;
+}
